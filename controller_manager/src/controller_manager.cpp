@@ -33,7 +33,9 @@ ControllerManager::ControllerManager(
   std::shared_ptr<hardware_interface::RobotHardware> hw,
   std::shared_ptr<rclcpp::executor::Executor> executor,
   const std::string & manager_node_name)
-: rclcpp::Node(manager_node_name),
+: 
+  rclcpp::Node( manager_node_name.substr( manager_node_name.find_last_of('/')+1 ),
+                manager_node_name.substr( 0, manager_node_name.substr(1).find('/'))),
   hw_(hw),
   executor_(executor),
   // add pluginlib loader by default
